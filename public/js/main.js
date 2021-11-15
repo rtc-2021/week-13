@@ -270,6 +270,7 @@ function handleRtcConnectionNegotiation(id) {
 
 function handleRtcIceCandidate(id) {
   return function({ candidate }) {
+    console.log('MY ICE CANDIDATE', candidate);
     sc.emit('signal', { to: id, from: $self.id,
       signal: { candidate: candidate } });
   }
@@ -385,6 +386,7 @@ async function handleScSignal({ from, signal: { description, candidate } }) {
   } else if (candidate) {
     // Handle ICE candidates
     try {
+      console.log(`INCOMING ICE CANDIDATE for ${id}`, candidate);
       await peer.connection.addIceCandidate(candidate);
     } catch(e) {
       // Log error unless $self[id] is ignoring offers
