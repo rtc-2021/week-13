@@ -5,7 +5,11 @@
  */
 
 const $self = {
-  rtcConfig: null,
+  rtcConfig: {
+    iceServers: [{
+      urls: "stun:stun.l.google.com:19302"
+    }]
+  },
   mediaConstraints: { audio: false, video: true }
 };
 
